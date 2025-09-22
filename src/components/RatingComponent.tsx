@@ -1,4 +1,4 @@
-import { useState, type FC } from "react";
+import { type FC } from "react";
 import { FiStar } from "react-icons/fi";
 
 interface RatingComponentProps {

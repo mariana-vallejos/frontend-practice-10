@@ -32,12 +32,12 @@ const RatingFormSchema = Yup.object().shape({
 });
 
 const RatingForm = () => {
-    const [dataSubmited, setDataSubmited] = useState<string>()
+    const [submittedData, setSubmittedData] = useState<FormValues | null>(null);
     const formik = useFormik<FormValues>({
         initialValues,
         validationSchema: RatingFormSchema,
         onSubmit: (values: FormValues, { resetForm }: FormikHelpers<FormValues>) => {
-            setDataSubmited(JSON.stringify(values, null, 2));
+            setSubmittedData(values);
             resetForm();
         },
     });
@@ -95,7 +95,13 @@ const RatingForm = () => {
 
             <div className="w-1/2 px-5">
                 <h4 className="text-xl font-semibold">Information submitted:</h4>
-                <p>{dataSubmited}</p>
+                {submittedData ? (
+                    <pre className="bg-gray-100 p-4 rounded text-sm overflow-auto max-h-[400px]">
+                        {JSON.stringify(submittedData, null, 2)}
+                    </pre>
+                ) : (
+                    <p className="text-gray-500">No data submitted yet.</p>
+                )}
             </div>
         </section>
     );
