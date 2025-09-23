@@ -24,6 +24,7 @@ export default function SocialLinksForm() {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm<FormValues>({
     defaultValues: {
       socialLinks: [{ platform: "", url: "" }],
@@ -37,6 +38,8 @@ export default function SocialLinksForm() {
 
   const onSubmit = (data: FormValues) => {
     console.log("Submitted:", data);
+    alert(JSON.stringify(data))
+    reset()
   };
 
   return (
