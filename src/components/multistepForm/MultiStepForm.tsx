@@ -8,6 +8,9 @@ import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
 import Step4 from "./steps/Step4";
 import { defaultValues, type FormValues } from "./types/MultistepForm";
+import { Stepper } from "./Stepper";
+
+const stepLabels = ["Personal Info", "Address", "Preferences", "Review"];
 
 const MultiStepForm = () => {
   const [step, setStep] = useState(0);
@@ -49,58 +52,61 @@ const MultiStepForm = () => {
   };
 
   return (
-    <section className="flex max-w-2xl bg-white rounded-2xl shadow-2xl py-4 px-2 max-h-3xl">
-      <div className="w-1/3 py-3 pl-8 m-auto">
-        <h2 className="text-2xl font-bold">Welcome!</h2>
-        <p>Get started in under 2 minutes.</p>
-      </div>
-      <FormProvider {...methods}>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="mx-auto p-6 space-y-4"
-        >
-          <h2 className="text-xl font-bold mb-2">Step {step + 1}</h2>
+    <div className="block">
+      <Stepper currentStep={step} steps={stepLabels} />
+      <section className="flex max-w-2xl bg-white rounded-2xl shadow-2xl py-4 px-2 max-h-3xl">
+        <div className="w-1/3 py-3 pl-8 m-auto">
+          <h2 className="text-2xl font-bold">Welcome!</h2>
+          <p>Get started in under 2 minutes.</p>
+        </div>
+        <FormProvider {...methods}>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="mx-auto p-6 space-y-4"
+          >
+            <h2 className="text-xl font-bold mb-2">Step {step + 1}</h2>
 
-          {/* Step 1: Personal Info */}
-          {step === 0 && <Step1 />}
-          {/* step 2: address  */}
-          {step === 1 && <Step2 />}
-          {/* Step 3: Preferences */}
-          {step === 2 && <Step3 />}
-          {/* Step 4: Review */}
-          {step === 3 && <Step4 />}
+            {/* Step 1: Personal Info */}
+            {step === 0 && <Step1 />}
+            {/* step 2: address  */}
+            {step === 1 && <Step2 />}
+            {/* Step 3: Preferences */}
+            {step === 2 && <Step3 />}
+            {/* Step 4: Review */}
+            {step === 3 && <Step4 />}
 
-          <div className="flex justify-between mt-4">
-            {step > 0 && (
-              <button
-                type="button"
-                onClick={prevStep}
-                className="px-4 py-2 bg-gray-300 rounded"
-              >
-                Back
-              </button>
-            )}
-            {step < 3 && (
-              <button
-                type="button"
-                onClick={nextStep}
-                className="px-4 py-2 bg-blue-500 text-white rounded"
-              >
-                Next
-              </button>
-            )}
-            {step === 3 && (
-              <button
-                type="submit"
-                className="px-4 py-2 bg-green-600 text-white rounded"
-              >
-                Submit
-              </button>
-            )}
-          </div>
-        </form>
-      </FormProvider>
-    </section>
+            <div className="flex justify-between mt-4">
+              {step > 0 && (
+                <button
+                  type="button"
+                  onClick={prevStep}
+                  className="px-4 py-2 bg-gray-300 rounded"
+                >
+                  Back
+                </button>
+              )}
+              {step < 3 && (
+                <button
+                  type="button"
+                  onClick={nextStep}
+                  className="px-4 py-2 bg-blue-500 text-white rounded"
+                >
+                  Next
+                </button>
+              )}
+              {step === 3 && (
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-green-600 text-white rounded"
+                >
+                  Submit
+                </button>
+              )}
+            </div>
+          </form>
+        </FormProvider>
+      </section>
+    </div>
   );
 };
 
