@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { stepSchemas } from "./schemas/StepSchemas";
 import * as yup from "yup";
@@ -36,6 +36,20 @@ const MultiStepForm = () => {
   });
 
   const { handleSubmit, register, trigger, watch, reset, formState: { errors }} = methods;
+
+  useEffect(() => {
+    const saved = localStorage.getItem("multiStepForm");
+    if (saved) {
+      reset(JSON.parse(saved));
+    }
+  }, [reset]);
+
+  useEffect(() => {
+    const subscription = watch((value) => {
+      localStorage.setItem("multiStepForm", JSON.stringify(value));
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   const nextStep = async () => {
     const valid = await trigger();
