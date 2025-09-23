@@ -1,6 +1,6 @@
 import "./App.css";
 import MultiStepForm from "./components/multistepForm/MultiStepForm";
-import RatingForm from "./components/RatingForm";
+import RatingForm from "./components/ratingForm/RatingForm";
 import SocialLinksForm from "./components/SocialLinkForm";
 
 function App() {
