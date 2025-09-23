@@ -1,5 +1,5 @@
 import "./App.css";
-import MultiStepForm from "./components/MultiStepForm";
+import MultiStepForm from "./components/multistepForm/MultiStepForm";
 import RatingForm from "./components/RatingForm";
 import SocialLinksForm from "./components/SocialLinkForm";
 
